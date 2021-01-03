@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="fr" xml:lang="fr">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 3 Importance des variables dans les modèles prédictifs | Interprétabilité de boîtes noires</title>
+  <meta name="description" content="Projet tutoré présenté par Lucie Guillaumin et Mehdi Chebli encadré par Mr. Perduca." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 3 Importance des variables dans les modèles prédictifs | Interprétabilité de boîtes noires" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projet tutoré présenté par Lucie Guillaumin et Mehdi Chebli encadré par Mr. Perduca." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 3 Importance des variables dans les modèles prédictifs | Interprétabilité de boîtes noires" />
+  
+  <meta name="twitter:description" content="Projet tutoré présenté par Lucie Guillaumin et Mehdi Chebli encadré par Mr. Perduca." />
+  
+
+<meta name="author" content="Lucie Guillaumin &amp; Mehdi Chebli" />
+
+
+<meta name="date" content="2021-01-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="graphique-de-dépendance-partielle-pdp.html"/>
+<link rel="next" href="substitut-local-lime.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Interprétabilité de boites noires</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html"><i class="fa fa-check"></i><b>2</b> Graphique de dépendance partielle (PDP)</a><ul>
+<li class="chapter" data-level="2.1" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#définition"><i class="fa fa-check"></i><b>2.1</b> Définition</a><ul>
+<li class="chapter" data-level="" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple"><i class="fa fa-check"></i>Exemple</a></li>
+<li class="chapter" data-level="" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#cas-particulier"><i class="fa fa-check"></i>Cas particulier</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#avantages"><i class="fa fa-check"></i><b>2.2</b> Avantages</a></li>
+<li class="chapter" data-level="2.3" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#inconvénients"><i class="fa fa-check"></i><b>2.3</b> Inconvénients</a></li>
+<li class="chapter" data-level="2.4" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#programmation"><i class="fa fa-check"></i><b>2.4</b> Programmation</a></li>
+<li class="chapter" data-level="2.5" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemples"><i class="fa fa-check"></i><b>2.5</b> Exemples</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple-1-utilisation-de-deux-boites-noires-différentes-comme-modèles-sur-le-jeu-de-données-weather"><i class="fa fa-check"></i><b>2.5.1</b> Exemple 1 : Utilisation de deux boites noires différentes comme modèles sur le jeu de données <code>weather</code></a></li>
+<li class="chapter" data-level="2.5.2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple-2-utilisation-de-deux-boites-noires-différentes-comme-modèles-sur-le-jeu-de-données-mtcars"><i class="fa fa-check"></i><b>2.5.2</b> Exemple 2 : Utilisation de deux boites noires différentes comme modèles sur le jeu de données <code>mtcars</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#espérance-conditionnelle-individuelle-ice"><i class="fa fa-check"></i><b>2.6</b> Espérance conditionnelle individuelle (ICE)</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#définition-1"><i class="fa fa-check"></i><b>2.6.1</b> Définition</a></li>
+<li class="chapter" data-level="2.6.2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple-ice-avec-le-jeu-de-données-weather-et-comme-boite-noire-une-forêt-aléatoire"><i class="fa fa-check"></i><b>2.6.2</b> Exemple : ICE avec le jeu de données <code>weather</code> et comme boite noire une forêt aléatoire</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html"><i class="fa fa-check"></i><b>3</b> Importance des variables dans les modèles prédictifs</a><ul>
+<li class="chapter" data-level="3.1" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#définition-2"><i class="fa fa-check"></i><b>3.1</b> Définition</a></li>
+<li class="chapter" data-level="3.2" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#avantages-2"><i class="fa fa-check"></i><b>3.2</b> Avantages</a></li>
+<li class="chapter" data-level="3.3" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#inconvénients-2"><i class="fa fa-check"></i><b>3.3</b> Inconvénients</a></li>
+<li class="chapter" data-level="3.4" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#en-r"><i class="fa fa-check"></i><b>3.4</b> En <code>R</code></a></li>
+<li class="chapter" data-level="3.5" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#exemples-1"><i class="fa fa-check"></i><b>3.5</b> Exemples</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#exemple-1-pfi-sur-les-données-iris"><i class="fa fa-check"></i><b>3.5.1</b> Exemple 1 : PFI sur les données <code>iris</code></a></li>
+<li class="chapter" data-level="3.5.2" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#exemple-2-pfi-sur-les-données-fifa"><i class="fa fa-check"></i><b>3.5.2</b> Exemple 2 : PFI sur les données <code>fifa</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html"><i class="fa fa-check"></i><b>4</b> Substitut local (LIME)</a><ul>
+<li class="chapter" data-level="4.1" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#définition-3"><i class="fa fa-check"></i><b>4.1</b> Définition</a></li>
+<li class="chapter" data-level="4.2" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#avantages-3"><i class="fa fa-check"></i><b>4.2</b> Avantages</a></li>
+<li class="chapter" data-level="4.3" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#inconvénients-3"><i class="fa fa-check"></i><b>4.3</b> Inconvénients</a></li>
+<li class="chapter" data-level="4.4" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#en-r-1"><i class="fa fa-check"></i><b>4.4</b> En <code>R</code></a></li>
+<li class="chapter" data-level="4.5" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#exemples-2"><i class="fa fa-check"></i><b>4.5</b> Exemples</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#exemple-1-lime-sur-le-jeu-de-données-weather"><i class="fa fa-check"></i><b>4.5.1</b> Exemple 1 : LIME sur le jeu de données <code>weather</code></a></li>
+<li><a href="substitut-local-lime.html#exemple-2-lime-sur-le-jeu-de-données-iris">Exemple 2 : LIME sur le jeu de données <code>iris</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>5</b> Références</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Interprétabilité de boîtes noires</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="importance-des-variables-dans-les-modèles-prédictifs" class="section level1">
+<h1><span class="header-section-number">Chapitre 3</span> Importance des variables dans les modèles prédictifs</h1>
+<div id="définition-2" class="section level2">
+<h2><span class="header-section-number">3.1</span> Définition</h2>
+<p>La fonction de permutation mesure l'augmentation de l'erreur de prédiction du modèle après la permutation des valeurs de la fonction, ce qui rompt la relation entre la fonction et le résultat réel. Son énorme avantage est qu’elle s’applique à n’importe quel type de modèle prédictif.<br />
+Une caractéristique est <em>importante</em> si le mélange de ses valeurs augmente l'erreur du modèle, alors dans ce cas, le modèle s'est appuyé sur cette caractéristique pour la prédiction.<br />
+Une fonction est <em>sans importance</em> si le mélange de ses valeurs laisse l'erreur de modèle inchangée, en effet dans ce cas, le modèle a ignoré la fonction pour la prédiction.<br />
+En résumé, l'algorithme permet de modifier les valeurs des variables pour voir si l'erreur augmente ou diminue.</p>
+<p>On introduit, ici, l'algorithme d'importance des caractéristiques de permutation basé sur Fisher, Rudin et Dominici (2018). Pour neutraliser la variable, ils préconisent de mélanger aléatoirement les valeurs à l’intérieur du vecteur et, par conséquent, de casser le lien qu’elle peut entretenir avec la classe à prédire (et les autres variables par la même occasion).<br />
+On retranscrit l'algorithme :<br />
+Entrée: modèle formé <span class="math inline">\(f\)</span>, matrice de caractéristiques <span class="math inline">\(X\)</span>, vecteur cible <span class="math inline">\(y\)</span>, mesure d'erreur <span class="math inline">\(L(y, f)\)</span>.</p>
+<ol style="list-style-type: decimal">
+<li><p>Estimer l'erreur d'origine du modèle <span class="math inline">\(e^{orig} = L(y, f(X))\)</span> (par exemple, erreur quadratique moyenne)</p></li>
+<li>Pour chaque caractéristique <span class="math inline">\(j = 1,...,p\)</span> faire:</li>
+</ol>
+<ul>
+<li>Générez une matrice de caractéristiques <span class="math inline">\(X^{perm}\)</span> en permutant la caractéristique <span class="math inline">\(j\)</span> dans les données <span class="math inline">\(X\)</span>. Cela rompt l'association entre la caractéristique <span class="math inline">\(j\)</span> et le résultat réel <span class="math inline">\(y\)</span>.<br />
+</li>
+<li>Estimer l'erreur <span class="math inline">\(e^{perm} = L(Y, f(X^{perm}))\)</span> sur la base des prédictions des données permutées.<br />
+</li>
+<li>Calculer l'importance de la fonction de permutation <span class="math inline">\(FI^j = e^{perm} / e^{orig}\)</span>. Alternativement, la différence peut être utilisée: <span class="math inline">\(FI^j = e^{perm} - e^{orig}\)</span>.</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Trier les entités par <span class="math inline">\(FI\)</span> décroissante.</li>
+</ol>
+<p>L’importance des variables peut être estimée en modélisation (sur l’échantillon d’apprentissage) ou en prédiction (sur l’échantillon test). Dans les deux cas, les principales étapes sont les mêmes : calculer le taux d’erreur de référence, calculer ensuite le même indicateur en neutralisant tour à tour chaque variable prédictive et enfin former le ratio entre les deux valeurs.</p>
+<p>L'idée de la permutation étant de mesurer l'erreur quadratique moyenne/absolue des prédictions qui ont été faites après permutation de l'ensemble des <span class="math inline">\(X_1^{(i)}\)</span> où <span class="math inline">\(i = 1,..,n\)</span>. La fonction calcule plusieurs erreurs de prédiction pour une même variable dont les valeurs ont été affectées à d'autres individus <span class="math inline">\(i\)</span>. Le but est de comparer si le mélange des valeurs provoque un effet sur l'erreur du modèle, donc savoir si l'on peut traduire le comportement d'une variable <span class="math inline">\(Y\)</span> affecté à une variable <span class="math inline">\(X\)</span> :</p>
+<ul>
+<li><p>Le mélange des valeurs de <span class="math inline">\(X_1^{(i)}\)</span>, provoquant une augmentation de l'erreur du modèle, traduit l'importance de <span class="math inline">\(X_1\)</span> car cela indique que le modèle s'est appuyé sur cette variable pour prédire <span class="math inline">\(Y\)</span>.</p></li>
+<li><p>Le mélange des valeurs de <span class="math inline">\(X_1^{(i)}\)</span>, n'ayant aucun effet sur l’augmentation de l'erreur du modèle, montre qu'il n'y a eu aucune interaction pour la prédiction et donc n'intervient pas dans le traitement.</p></li>
+</ul>
+</div>
+<div id="avantages-2" class="section level2">
+<h2><span class="header-section-number">3.2</span> Avantages</h2>
+<p>L'un des avantages pour la Permutation Features Importance est qu'il casse les effets d'interactions issues des variables explicatives <span class="math inline">\(X_i\)</span> très fortement corrélées entre elles. En effet, puisqu'elle permute les données, de ce fait cette procédure compresse l'information et augmente implicitement l'erreur dans notre modèle.</p>
+<p>C'est aussi un avantage sur le temps de traitement des données, il n'est pas nécessaire d'obtenir/ modifier/ supprimer/ entraîner le modèle étudié et puis, ici l'expérience est de garder un modèle fixe et de faire varier pour chaque <span class="math inline">\(X_i\)</span> leurs positions.<br />
+L'utilisation de la Permutation Features Importance reste assez simpliste, ne nécessitant pas d'ensemble d'apprentissage car les variables qui seront dites impactantes pour une analyse PFI ne le serons pas sur une nouvelle expérimentation après suppression de ces dernières.</p>
+</div>
+<div id="inconvénients-2" class="section level2">
+<h2><span class="header-section-number">3.3</span> Inconvénients</h2>
+<p>L'utilisation de la permutation se révèle pratique pour interpréter un ensemble de données. Néanmoins elle regorge de points négatifs lorsque nous sommes dans une situation où des variables explicatives <span class="math inline">\(X_i\)</span> s'avèrent être corrélées. Prenons un exemple pour mieux comprendre les phénomènes de corrélations à l'aide du jeu de données <code>mtcars</code> :<br />
+<img src="03-fct_permut_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<p>Nous avons pris les variables <code>disp</code> ainsi que <code>wt</code> qui sont fortement corrélées puisque <span class="math inline">\(cor(X_{disp} , X_{wt}) = 0.888\)</span> pour expliquer le gros problème de la permutation. Nous avons mis en évidence à l'aide du graphique de gauche un lien linéaire qui existe, pour comprendre les limites de cette méthode d’interprétation nous avons permuté les données issues de <code>disp</code>.</p>
+<p>Enfin, nous projetons le graphique entre la variable <span class="math inline">\(X_{disp}\)</span> permutée et <span class="math inline">\(X_{wt}\)</span> pour mettre en évidence le gros défaut de la permutation. En effet, on constate que la linéarité a disparu dans le nuage de points de droite. Or, pour calculer l'importance de la variable <span class="math inline">\(X_{disp}\)</span> le mélange provoqué par la permutation va aboutir à des calculs de prédictions complètement fragiles dans des zones supposées aberrantes puisque si l'on s'intéresse aux individus <span class="math inline">\(i\)</span> de la partie haute-gauche <span class="math inline">\(i = {23,11;31,14,15,17}\)</span> ceux sont des points aberrants qui vont entrer dans les calculs pour prédire <span class="math inline">\(Y\)</span> et saboter l'interprétation finale.</p>
+</div>
+<div id="en-r" class="section level2">
+<h2><span class="header-section-number">3.4</span> En <code>R</code></h2>
+<p>En <code>R</code>, nous utilisons toujours le package <code>iml</code> pour implémenter les permutations.<br />
+Ci-dessous nous pouvons trouver un exemple de code avec pour boite noire un arbre décisionnel :</p>
+<pre><code>tree &lt;- rpart(Petal.Length ~ .,data = iris)
+
+Y &lt;- iris$Petal.Length
+X &lt;- iris[-which(names(iris) == &quot;Petal.Length&quot;)]
+
+mod &lt;- Predictor$new(tree, 
+                     data = X, 
+                     y = Y)
+
+imp &lt;- FeatureImp$new(mod, loss = &quot;mse&quot;)
+
+plot(imp)</code></pre>
+<p>Il existe aussi d'autres packages pour implémenter des PFI comme le package <code>vip</code> ou bien <code>DALEX</code>.<br />
+Du coté de <code>Python</code>, les PFI sont intégrés dans <code>alibi</code>.</p>
+</div>
+<div id="exemples-1" class="section level2">
+<h2><span class="header-section-number">3.5</span> Exemples</h2>
+<div id="exemple-1-pfi-sur-les-données-iris" class="section level3">
+<h3><span class="header-section-number">3.5.1</span> Exemple 1 : PFI sur les données <code>iris</code></h3>
+<p>Nous utilisons le jeu de données <code>iris</code> contenu dans <code>R</code> afin d'effectuer une Permutation Features Importance.<br />
+Nous allons implémenter un arbre décisionnel que nous comparerons à une forêt aléatoire après avoir regardé l'importance des variables en fonction du modèle de boîte noire utilisé.</p>
+<div id="construction-de-notre-arbre-décisionnel" class="section level4">
+<h4><span class="header-section-number">3.5.1.1</span> Construction de notre arbre décisionnel</h4>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="03-fct_permut_files/figure-html/unnamed-chunk-3-1.png" alt="Graphique d'une Permutation Features Importance pour un arbre décisionnel appliqué au jeu de données iris." width="480" />
+<p class="caption">
+Figure 3.1: Graphique d'une Permutation Features Importance pour un arbre décisionnel appliqué au jeu de données iris.
+</p>
+</div>
+<p>Ici, nous avons un graphique de notre Permutation Features Impact avec comme mesure d'erreur <code>mse</code> (il en existe d'autres).<br />
+Il représente l'erreur quadratique moyenne définie par <span class="math inline">\(MSE = \left( \frac{1}{n} \right) \times\sum_{i=1}^{n} (Y_i-\hat{Y_i})^2\)</span>.<br />
+Les observations à faire pour ce genre de graphique est d'observer les variables dites importantes ou celles qui ont un comportement impactant <span class="math inline">\(Y\)</span> à travers le comportement de notre fonction de permutation <span class="math inline">\(FI_j = e^{perm} - e^{orig}\)</span> où les <span class="math inline">\(e^{perm}\)</span> et <span class="math inline">\(e^{orig}\)</span> représentent leurs erreurs quadratiques respectives.</p>
+<p>Lorsque les variables comme <code>Sepal.Width</code> sont relativement proches de 0, cela indique qu'elles n'ont pas vraiment d’impact sur la prédiction de <span class="math inline">\(Y\)</span>. Autrement dit, l'interaction est très faible voire inexistante. Le constat subsistant est que la fonction de permutation <span class="math inline">\(FI\)</span> est nulle, autrement dit le modèle d'apprentissage n'apporte pas plus d'informations qu'avec ou sans permutation, via le fait que l'erreur du modèle n'augmente pas <span class="math inline">\(e^{perm} = e^{orig}\)</span>. De ce fait la variable <code>Sepal.Width</code> n'est donc pas importante.</p>
+<p>En revanche pour les variables comme <code>Species</code> nous voyons d'office qu'elle est importante sur la prédiction de <code>Petal.Length</code>. En effet <span class="math inline">\(e^{perm} &gt; e^{orig}\)</span> est très concret, d’où l'augmentation d'erreur plus grande après permutation impliquant une explication partielle mais réelle pour prédire <span class="math inline">\(Y :\)</span> La longueur des pétales.</p>
+<p>Pour ce qui est des variables <code>Sepal.Length</code> et <code>Petal.Width</code>, nous notons des fonctions de permutations <span class="math inline">\(FI &gt; 0\)</span> mais néanmoins très faibles elles demeurent être très proches de 0, cela met en évidence la question de seuil à prendre en compte pour vraiment qualifier une variable dite importante. Néanmoins une maigre part d'information s'ajoute à notre expérience afin de prédire <code>Petal.Length</code>.</p>
+<div id="comparaison-des-modèles-pdpice-vs-permutation-feature-importance" class="section level5 unnumbered">
+<h5>Comparaison des modèles PDP/ICE vs Permutation Feature Importance</h5>
+<p>Ce qui est intéressant de voir ici est que contrairement à l'utilisation du PDP ou son dérivé l'ICE (chapitre 2), on n'obtient pas nécessairement les mêmes résultats : le graphique de l'importance des variables met en lumière une seule et unique variable définie comme importante (<code>Species</code>).<br />
+Chaque méthode a ses contraintes et ses avantages cela diffère donc de ce que l'on souhaite interpréter/conclure en fonction de nos types de données.</p>
+<p>Nous allons utiliser une autre méthode de classification pour décrire les interprétations faites par la méthode de permutation des variables.</p>
+</div>
+</div>
+<div id="construction-de-notre-forêt-aléatoire" class="section level4">
+<h4><span class="header-section-number">3.5.1.2</span> Construction de notre forêt aléatoire</h4>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="03-fct_permut_files/figure-html/unnamed-chunk-4-1.png" alt="Graphique d'une Permutation Features Importance pour une forêt aléatoire appliquée au jeu de données iris." width="480" />
+<p class="caption">
+Figure 2.1: Graphique d'une Permutation Features Importance pour une forêt aléatoire appliquée au jeu de données iris.
+</p>
+</div>
+<p>Voici les résultats issus de la permutation sur des données simulées à l'aide d'une forêt aléatoire. Contrairement à ce que nous apportait comme informations l’arbre décisionnel, ici, nous constatons distinctement que les variables <code>Species</code>, <code>Sepal.Length</code> et <code>Petal.Width</code> génèrent une erreur plus grande lorsque le modèle est permuté témoignant de l'explication qu'elles apportent chacune d'entre elles sur <code>Petal.Length</code>, on a donc <span class="math inline">\(e^{perm} &gt; e^{orig}\)</span> avec une différence assez notable.</p>
+<p>Pour la variable <code>Sepal.Width</code>, on voit ici que la fonction de permutation <span class="math inline">\(FI^j = e^{perm} - e^{orig} = 0\)</span>. On remarque qu'aucune explication n'est apportée en plus y compris sous l'effet de la permutation, elle ne suscite donc pas grand intérêt dans l'interaction entre <span class="math inline">\(X^2_i\)</span> et <span class="math inline">\(Y_i\)</span>.</p>
+<div id="comparaison-permutation-feature-importance-entre-arbre-décisionnel-et-forêt-aléatoire" class="section level5">
+<h5><span class="header-section-number">3.5.1.2.1</span> Comparaison Permutation Feature Importance entre arbre décisionnel et forêt aléatoire</h5>
+<p>Pour un même type de traitement sur les boîtes noires avec deux modèles de classifications différents, nous avons des résultats asymétriques pour un modèle d'erreur identique, le MSE.<br />
+En effet, avec l'utilisation de l’arbre décisionnel, l'unique variable <code>Species</code> a été qualifiée d'importante pour la prédiction de <code>Petal.Length</code>.</p>
+<p>Tandis que les résultats issues des forêts aléatoires mettent en évidence trois variables importantes <code>Species</code>, <code>Sepal.Length</code> et <code>Petal.Width</code>, ce qui est complètement différent et relève de la complexité des choix de constructions pour nos classifications mais aussi pour nos traitements de boîtes noires.</p>
+<p>Toutes ces méthodes amènent à penser quels critères sont indicatifs pour anticiper, quels traitements sont à proscrire ou à prescrire suivant notre ensemble d'apprentissage.</p>
+</div>
+</div>
+</div>
+<div id="exemple-2-pfi-sur-les-données-fifa" class="section level3">
+<h3><span class="header-section-number">3.5.2</span> Exemple 2 : PFI sur les données <code>fifa</code></h3>
+<p>Pour une étude comparative avec une base de donnée plus conséquente, nous prenons donc la base de données fifa regroupant les notes des joueurs professionnels ainsi que leurs caractéristiques. Comme dans le cas précédent, nous effectuons une forêt aléatoire ainsi qu'un arbre décisionnel pour comparer les sorties.</p>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="03-fct_permut_files/figure-html/unnamed-chunk-5-1.png" alt="Graphique de deux Permutation Features Importance pour une forêt aléatoire ainsi que pour un arbre décisionnel appliqués au jeu de données fifa." width="1152" />
+<p class="caption">
+Figure 2.2: Graphique de deux Permutation Features Importance pour une forêt aléatoire ainsi que pour un arbre décisionnel appliqués au jeu de données fifa.
+</p>
+</div>
+<p>Au vu des ces deux graphiques, ce que nous voyons de prime abord est l'importance des variables que renvoie notre PFI sur notre forêt aléatoire. Il y a juste besoin de regarder les échelles pour se rendre compte à quel point l'erreur engendré par la permutation via une forêt aléatoire est plus grande que celle issue de l’arbre décisionnel.<br />
+Par conséquent, la mesure de l'importance est beaucoup plus démonstrative pour les forêts aléatoires.<br />
+Ce qu'il faut ajouter en plus, c'est que la méthode des forêts aléatoires détecte beaucoup plus de variables dites importantes à contrario de l'arbre de décision qui ne dégage que trois variables importantes.<br />
+Les critères de mesure d'erreur étant les mêmes basées sur le mean square error, l'arbre génère beaucoup moins d'informations que ce que les forêts aléatoires peuvent en apporter.</p>
+<div id="ouverture-sur-le-choix-des-variables" class="section level4">
+<h4><span class="header-section-number">3.5.2.1</span> Ouverture sur le choix des variables</h4>
+<p>Cette méthode d'interprétabilité relevant des avantages et des inconvénients, ici nous avons vu l'implémentation de la Permutation Features Importance. Cela nous a permis d'affirmer ou infirmer certains propos pour certaines variables, en revanche il pose un problème de validation des données pour des fonction de permutation <span class="math inline">\(FI^j \sim 0\)</span>. En effet, là se pose des tests d'hypothèses statistiques à effectuer en aval pour valider mathématiquement nos résultats lorsqu'il demeure une augmentation d'erreur de modèle après permutations mais de valeurs qui émettent le doute.</p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="graphique-de-dépendance-partielle-pdp.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="substitut-local-lime.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Interpretabilite-boite-noire.pdf", "Interpretabilite-boite-noire.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

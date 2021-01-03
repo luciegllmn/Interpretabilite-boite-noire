@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="fr" xml:lang="fr">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 4 Substitut local (LIME) | Interprétabilité de boîtes noires</title>
+  <meta name="description" content="Projet tutoré présenté par Lucie Guillaumin et Mehdi Chebli encadré par Mr. Perduca." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 4 Substitut local (LIME) | Interprétabilité de boîtes noires" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projet tutoré présenté par Lucie Guillaumin et Mehdi Chebli encadré par Mr. Perduca." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 4 Substitut local (LIME) | Interprétabilité de boîtes noires" />
+  
+  <meta name="twitter:description" content="Projet tutoré présenté par Lucie Guillaumin et Mehdi Chebli encadré par Mr. Perduca." />
+  
+
+<meta name="author" content="Lucie Guillaumin &amp; Mehdi Chebli" />
+
+
+<meta name="date" content="2021-01-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="importance-des-variables-dans-les-modèles-prédictifs.html"/>
+<link rel="next" href="références.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Interprétabilité de boites noires</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html"><i class="fa fa-check"></i><b>2</b> Graphique de dépendance partielle (PDP)</a><ul>
+<li class="chapter" data-level="2.1" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#définition"><i class="fa fa-check"></i><b>2.1</b> Définition</a><ul>
+<li class="chapter" data-level="" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple"><i class="fa fa-check"></i>Exemple</a></li>
+<li class="chapter" data-level="" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#cas-particulier"><i class="fa fa-check"></i>Cas particulier</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#avantages"><i class="fa fa-check"></i><b>2.2</b> Avantages</a></li>
+<li class="chapter" data-level="2.3" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#inconvénients"><i class="fa fa-check"></i><b>2.3</b> Inconvénients</a></li>
+<li class="chapter" data-level="2.4" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#programmation"><i class="fa fa-check"></i><b>2.4</b> Programmation</a></li>
+<li class="chapter" data-level="2.5" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemples"><i class="fa fa-check"></i><b>2.5</b> Exemples</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple-1-utilisation-de-deux-boites-noires-différentes-comme-modèles-sur-le-jeu-de-données-weather"><i class="fa fa-check"></i><b>2.5.1</b> Exemple 1 : Utilisation de deux boites noires différentes comme modèles sur le jeu de données <code>weather</code></a></li>
+<li class="chapter" data-level="2.5.2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple-2-utilisation-de-deux-boites-noires-différentes-comme-modèles-sur-le-jeu-de-données-mtcars"><i class="fa fa-check"></i><b>2.5.2</b> Exemple 2 : Utilisation de deux boites noires différentes comme modèles sur le jeu de données <code>mtcars</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#espérance-conditionnelle-individuelle-ice"><i class="fa fa-check"></i><b>2.6</b> Espérance conditionnelle individuelle (ICE)</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#définition-1"><i class="fa fa-check"></i><b>2.6.1</b> Définition</a></li>
+<li class="chapter" data-level="2.6.2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple-ice-avec-le-jeu-de-données-weather-et-comme-boite-noire-une-forêt-aléatoire"><i class="fa fa-check"></i><b>2.6.2</b> Exemple : ICE avec le jeu de données <code>weather</code> et comme boite noire une forêt aléatoire</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html"><i class="fa fa-check"></i><b>3</b> Importance des variables dans les modèles prédictifs</a><ul>
+<li class="chapter" data-level="3.1" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#définition-2"><i class="fa fa-check"></i><b>3.1</b> Définition</a></li>
+<li class="chapter" data-level="3.2" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#avantages-2"><i class="fa fa-check"></i><b>3.2</b> Avantages</a></li>
+<li class="chapter" data-level="3.3" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#inconvénients-2"><i class="fa fa-check"></i><b>3.3</b> Inconvénients</a></li>
+<li class="chapter" data-level="3.4" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#en-r"><i class="fa fa-check"></i><b>3.4</b> En <code>R</code></a></li>
+<li class="chapter" data-level="3.5" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#exemples-1"><i class="fa fa-check"></i><b>3.5</b> Exemples</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#exemple-1-pfi-sur-les-données-iris"><i class="fa fa-check"></i><b>3.5.1</b> Exemple 1 : PFI sur les données <code>iris</code></a></li>
+<li class="chapter" data-level="3.5.2" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#exemple-2-pfi-sur-les-données-fifa"><i class="fa fa-check"></i><b>3.5.2</b> Exemple 2 : PFI sur les données <code>fifa</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html"><i class="fa fa-check"></i><b>4</b> Substitut local (LIME)</a><ul>
+<li class="chapter" data-level="4.1" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#définition-3"><i class="fa fa-check"></i><b>4.1</b> Définition</a></li>
+<li class="chapter" data-level="4.2" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#avantages-3"><i class="fa fa-check"></i><b>4.2</b> Avantages</a></li>
+<li class="chapter" data-level="4.3" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#inconvénients-3"><i class="fa fa-check"></i><b>4.3</b> Inconvénients</a></li>
+<li class="chapter" data-level="4.4" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#en-r-1"><i class="fa fa-check"></i><b>4.4</b> En <code>R</code></a></li>
+<li class="chapter" data-level="4.5" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#exemples-2"><i class="fa fa-check"></i><b>4.5</b> Exemples</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#exemple-1-lime-sur-le-jeu-de-données-weather"><i class="fa fa-check"></i><b>4.5.1</b> Exemple 1 : LIME sur le jeu de données <code>weather</code></a></li>
+<li><a href="substitut-local-lime.html#exemple-2-lime-sur-le-jeu-de-données-iris">Exemple 2 : LIME sur le jeu de données <code>iris</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>5</b> Références</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Interprétabilité de boîtes noires</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="substitut-local-lime" class="section level1">
+<h1><span class="header-section-number">Chapitre 4</span> Substitut local (LIME)</h1>
+<div id="définition-3" class="section level2">
+<h2><span class="header-section-number">4.1</span> Définition</h2>
+<p>Les modèles de substitutions locaux représentent une nouvelle méthode d'interprétabilité qui explique chaque prédiction individuelle lors des traitements de machine learning.<br />
+Cet outil est une spécificité du modèle de substitution global. Ici, en utilisant la méthode LIME on cherche à expliquer bout à bout des prévisions pour tout type d'individu.</p>
+<p>La méthode LIME cherche à comprendre pour un ensemble de données pourquoi le modèle de machine learning a fait une certaine prédiction. Ainsi, elle teste pour chaque prédiction ce qu'il se passe lorsque les données sont perturbées/variées.<br />
+De ce fait, elle génère un nouvel ensemble de données perturbées ainsi que les prédictions qu'il en découle pour définir un ensemble d’apprentissage, avec une pondération des instances perturbées sur l'instance d'intérêt en fonction de la proximité avec cette dernière.</p>
+<p>On peut noter que cette méthode s'applique sur n'importe quelle méthode de machine learning. Elle présente donc l'explication d'une prédiction locale menant droit à de bonnes approximations locales. En revanche, il peut s'avérer que les approximations ne soient pas bonnes pour un modèle global, cela est défini par &quot;Local fidelity&quot;.</p>
+<p>Les modèles de substitutions sont exprimés ainsi : <span class="math display">\[
+explanation(x) = \arg\max_{g \in G} \ L(f,g,\pi_x) + \Omega(g)
+\]</span></p>
+</div>
+<div id="avantages-3" class="section level2">
+<h2><span class="header-section-number">4.2</span> Avantages</h2>
+<p>Ici, nous nous intéressons uniquement à LIME pour des données tabulaires. Sachez, tout de même, qu’il existe des algorithmes LIME pour des données textuelles ainsi que pour des images.<br />
+Cette méthode est une des rares pouvant être élargie à différents types de données.</p>
+<p>Le &quot;Local Fidelity&quot; est une mesure de précision sur la fiabilité du modèle interprétable. Il sert à expliquer les prédictions locales focalisées sur notre instance d'intérêt.</p>
+<p>La méthode LIME est très rapide en coût de calcul, et elle est implémentée sur les logiciels <code>R</code> et <code>Python</code> dans différents packages. On notera que lors de l'utilisation du package <code>iml</code>, <code>R</code> utilise directement les régressions linéaires lorsque nous appelons la fonction ce qui réduit les temps de calculs et de codes.</p>
+</div>
+<div id="inconvénients-3" class="section level2">
+<h2><span class="header-section-number">4.3</span> Inconvénients</h2>
+<p>La méthode LIME se base sur le choix de noyaux (estimations par densité). Cela implique que son utilisation doit être très contrôlée. En effet, elle nécessite pour chaque application de tester avec plusieurs paramètres de noyaux qui diffèrent afin de voir si les explications apportées s'avèrent être interprétables.</p>
+<p>Le &quot;Local Fidelity&quot; peut poser problème dans le cadre d'une analyse globale. Effectivement, nous avons dit précédemment que c'était une mesure fiable pour expliquer les prédictions locales. En revanche, dans sa globalité elle n'est pas forcément parlante et interprétable : ce qui met en évidence le contraste local vs global.</p>
+<p>De même que pour les fonctions de permutations, nous avons aussi un problème de corrélations entre variables endogènes puisque de nouvelles instances sont échantillonnées au cours de la procédure. Cela a pour effet de ne pas tenir compte des interactions entres variables corrélées qui constitueront des prédictions sur des ensembles de points de nouveaux incohérents.</p>
+<p>Il existe aussi le problème d'instabilité des explications. Les données permutées qui forment l'échantillon d'apprentissage rendent par défaut une explication instable, puisqu'elle ne garantit en rien qu'une fois le processus répété nous obtenons les mêmes résultats.</p>
+<p>La méthode LIME se trouve être prometteuse dans sa capacité à essayer d'expliquer ce qu'il se déroule dans les boîtes noires, ainsi que pour la compréhension de nos prédictions. Néanmoins, elle reste encore fragile et nécessite d'être bien construite pour renforcer cette méthode prometteuse et de l'appliquer sans soucis.</p>
+</div>
+<div id="en-r-1" class="section level2">
+<h2><span class="header-section-number">4.4</span> En <code>R</code></h2>
+<p>En <code>R</code>, nous utilisons toujours le package <code>iml</code> pour implémenter la méthode LIME.<br />
+Ci-dessous nous pouvons trouver un exemple de code avec pour boite noire une forêt aléatoire :</p>
+<pre><code>algo_FA = randomForest(formula, data, importance = TRUE)
+
+predictor = Predictor$new(model = algo_FA, data)
+
+lime.explain = LocalModel$new(predictor, x.interest = , k = 8) #k règle le nb de variable
+
+lime.explain$results %&gt;%
+  ggplot(aes(x = reorder(feature.value, effect), y = effect, fill = feature.value)) +
+    geom_bar(stat = &quot;identity&quot;) +
+    coord_flip() +
+    labs(x=&quot;&quot;, y=&quot;&quot;, fill=&quot;&quot;) +
+    theme(legend.position=&#39;none&#39;)
+    
+#ou tout simplement : plot(lime.explain)</code></pre>
+<p>Il existe aussi d'autres packages pour implémenter une méthode LIME comme le package <code>lime</code>.<br />
+Du coté de <code>Python</code>, les méthodes LIME sont intégrés dans <code>lime</code>.</p>
+</div>
+<div id="exemples-2" class="section level2">
+<h2><span class="header-section-number">4.5</span> Exemples</h2>
+<div id="exemple-1-lime-sur-le-jeu-de-données-weather" class="section level3">
+<h3><span class="header-section-number">4.5.1</span> Exemple 1 : LIME sur le jeu de données <code>weather</code></h3>
+<p>On utilise le jeu de données <code>weather</code> du package <code>nycflights13</code>. Il représente les données météorologiques horaires pour les trois aéroports de New York : EWR, LGA et JFK.</p>
+<div id="construction-de-lime-avec-comme-boite-noire-une-forêt-aléatoire" class="section level4 unnumbered">
+<h4>Construction de LIME avec comme boite noire une forêt aléatoire</h4>
+<div class="figure"><span id="fig:unnamed-chunk-3"></span>
+<img src="04-lime_files/figure-html/unnamed-chunk-3-1.png" alt="Graphique LIME pour la prédiction de la température des aéroports de New York avec une forêt aléatoire." width="672" />
+<p class="caption">
+Figure 3.1: Graphique LIME pour la prédiction de la température des aéroports de New York avec une forêt aléatoire.
+</p>
+</div>
+<p>Après avoir implémenté notre méthode LIME sur la prédiction de la température des aéroports, il en ressort ce graphique témoignant pour chaque variable explicative les effets de ces dernières, à l'aide des régressions effectuées en amont.<br />
+La barre des abscisses témoigne de l'effet que peut avoir une variable sur <span class="math inline">\(Y\)</span>.</p>
+<p>Pour ce qui est de la variable <code>dewp</code> nous avons un effet/coefficient positif impactant la montée de température lorsque cette dernière augmente aussi.</p>
+<p>Pour le reste, seul les variables <code>pressure</code>, <code>humid</code> et <code>visib</code> constituent un impact négatif sur la température lorsqu'elles augmentent. Cela a donc pour effet de diminuer la température dans les aéroports de New-York.</p>
+<p>Quant aux autres variables, LIME a décrété qu'elles n'avaient pas/peu de poids sur la température.</p>
+</div>
+<div id="construction-de-lime-avec-comme-boite-noire-lagorithme-des-knn" class="section level4 unnumbered">
+<h4>Construction de LIME avec comme boite noire l'agorithme des KNN</h4>
+<div class="figure"><span id="fig:unnamed-chunk-4"></span>
+<img src="04-lime_files/figure-html/unnamed-chunk-4-1.png" alt="Graphique LIME pour la prédiction de la température des aéroports de New York avec l'algorithme des KNN." width="672" />
+<p class="caption">
+Figure 2.1: Graphique LIME pour la prédiction de la température des aéroports de New York avec l'algorithme des KNN.
+</p>
+</div>
+<p>Nous pensons qu'il est intéressant de comparer deux modèles de boites noires sur le même jeu de données en appliquant la méthode LIME. Nous avons donc procédé à l'algorithme des KNN et à notre grande surprise nous obtenons les mêmes interprétations faites auparavant.<br />
+On peut cependant remarquer que les graphiques ne sont pas totalement égaux. En effet, lorsque l'on utilise la méthode LIME, il faut choisir sur quelle ligne de notre jeu de données nous nous basons (x.interest). Ici, nous avons choisi la première ligne pour l'algorithme des forêts aléatoires. Tandis que pour l'algorithme des KNN, nous avons choisi la troisième ligne : ce qui explique les différences.<br />
+Il est important de retenir que nous obtenons les mêmes interprétations peu importe la ligne choisie et l'algorithme.</p>
+</div>
+</div>
+<div id="exemple-2-lime-sur-le-jeu-de-données-iris" class="section level3 unnumbered">
+<h3>Exemple 2 : LIME sur le jeu de données <code>iris</code></h3>
+<div id="construction-de-lime-avec-comme-boite-noire-une-forêt-aléatoire-1" class="section level4 unnumbered">
+<h4>Construction de LIME avec comme boite noire une forêt aléatoire</h4>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="04-lime_files/figure-html/unnamed-chunk-5-1.png" alt="Graphique LIME pour la prédiction de la longueur des sépales d'une fleur avec une forêt aléatoire." width="672" />
+<p class="caption">
+Figure 2.2: Graphique LIME pour la prédiction de la longueur des sépales d'une fleur avec une forêt aléatoire.
+</p>
+</div>
+<p>On s’intéresse maintenant au jeu de données <code>iris</code>. Nous avons trois variables explicatives.<br />
+Après avoir implémenté notre méthode LIME sur la prédiction de la longueur des sépales, on remarque que seulement <code>Sepal.Width</code> et <code>Petal.Length</code> possèdent un impact positif sur cette prédiction.<br />
+En revanche, <code>Petal.Width</code> n'est pas impliquée sur la prédiction de <code>Sepal.Lenght</code>.</p>
+</div>
+<div id="construction-de-lime-avec-comme-boite-noire-lagorithme-des-knn-1" class="section level4 unnumbered">
+<h4>Construction de LIME avec comme boite noire l'agorithme des KNN</h4>
+<div class="figure"><span id="fig:unnamed-chunk-6"></span>
+<img src="04-lime_files/figure-html/unnamed-chunk-6-1.png" alt="Graphique LIME pour la prédiction de la longueur des sépales d'une fleur avec l'algorithme des KNN." width="672" />
+<p class="caption">
+Figure 2.3: Graphique LIME pour la prédiction de la longueur des sépales d'une fleur avec l'algorithme des KNN.
+</p>
+</div>
+<p>Ici, nous observons comme précédemment les mêmes interprétations.<br />
+Les graphiques sont totalement égaux, puisque nous avons choisi de prendre en compte les mêmes lignes d'observations. Grâce à ces deux exemples, on peut dire que peu importe l'algorithme utilisé nous obtiendrons les mêmes résultats et interprétation après l'application de la méthode LIME.</p>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="importance-des-variables-dans-les-modèles-prédictifs.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="références.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Interpretabilite-boite-noire.pdf", "Interpretabilite-boite-noire.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

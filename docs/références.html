@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="fr" xml:lang="fr">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapitre 5 Références | Interprétabilité de boîtes noires</title>
+  <meta name="description" content="Projet tutoré présenté par Lucie Guillaumin et Mehdi Chebli encadré par Mr. Perduca." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapitre 5 Références | Interprétabilité de boîtes noires" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projet tutoré présenté par Lucie Guillaumin et Mehdi Chebli encadré par Mr. Perduca." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapitre 5 Références | Interprétabilité de boîtes noires" />
+  
+  <meta name="twitter:description" content="Projet tutoré présenté par Lucie Guillaumin et Mehdi Chebli encadré par Mr. Perduca." />
+  
+
+<meta name="author" content="Lucie Guillaumin &amp; Mehdi Chebli" />
+
+
+<meta name="date" content="2021-01-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="substitut-local-lime.html"/>
+
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Interprétabilité de boites noires</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html"><i class="fa fa-check"></i><b>2</b> Graphique de dépendance partielle (PDP)</a><ul>
+<li class="chapter" data-level="2.1" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#définition"><i class="fa fa-check"></i><b>2.1</b> Définition</a><ul>
+<li class="chapter" data-level="" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple"><i class="fa fa-check"></i>Exemple</a></li>
+<li class="chapter" data-level="" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#cas-particulier"><i class="fa fa-check"></i>Cas particulier</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#avantages"><i class="fa fa-check"></i><b>2.2</b> Avantages</a></li>
+<li class="chapter" data-level="2.3" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#inconvénients"><i class="fa fa-check"></i><b>2.3</b> Inconvénients</a></li>
+<li class="chapter" data-level="2.4" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#programmation"><i class="fa fa-check"></i><b>2.4</b> Programmation</a></li>
+<li class="chapter" data-level="2.5" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemples"><i class="fa fa-check"></i><b>2.5</b> Exemples</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple-1-utilisation-de-deux-boites-noires-différentes-comme-modèles-sur-le-jeu-de-données-weather"><i class="fa fa-check"></i><b>2.5.1</b> Exemple 1 : Utilisation de deux boites noires différentes comme modèles sur le jeu de données <code>weather</code></a></li>
+<li class="chapter" data-level="2.5.2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple-2-utilisation-de-deux-boites-noires-différentes-comme-modèles-sur-le-jeu-de-données-mtcars"><i class="fa fa-check"></i><b>2.5.2</b> Exemple 2 : Utilisation de deux boites noires différentes comme modèles sur le jeu de données <code>mtcars</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#espérance-conditionnelle-individuelle-ice"><i class="fa fa-check"></i><b>2.6</b> Espérance conditionnelle individuelle (ICE)</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#définition-1"><i class="fa fa-check"></i><b>2.6.1</b> Définition</a></li>
+<li class="chapter" data-level="2.6.2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple-ice-avec-le-jeu-de-données-weather-et-comme-boite-noire-une-forêt-aléatoire"><i class="fa fa-check"></i><b>2.6.2</b> Exemple : ICE avec le jeu de données <code>weather</code> et comme boite noire une forêt aléatoire</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html"><i class="fa fa-check"></i><b>3</b> Importance des variables dans les modèles prédictifs</a><ul>
+<li class="chapter" data-level="3.1" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#définition-2"><i class="fa fa-check"></i><b>3.1</b> Définition</a></li>
+<li class="chapter" data-level="3.2" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#avantages-2"><i class="fa fa-check"></i><b>3.2</b> Avantages</a></li>
+<li class="chapter" data-level="3.3" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#inconvénients-2"><i class="fa fa-check"></i><b>3.3</b> Inconvénients</a></li>
+<li class="chapter" data-level="3.4" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#en-r"><i class="fa fa-check"></i><b>3.4</b> En <code>R</code></a></li>
+<li class="chapter" data-level="3.5" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#exemples-1"><i class="fa fa-check"></i><b>3.5</b> Exemples</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#exemple-1-pfi-sur-les-données-iris"><i class="fa fa-check"></i><b>3.5.1</b> Exemple 1 : PFI sur les données <code>iris</code></a></li>
+<li class="chapter" data-level="3.5.2" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#exemple-2-pfi-sur-les-données-fifa"><i class="fa fa-check"></i><b>3.5.2</b> Exemple 2 : PFI sur les données <code>fifa</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html"><i class="fa fa-check"></i><b>4</b> Substitut local (LIME)</a><ul>
+<li class="chapter" data-level="4.1" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#définition-3"><i class="fa fa-check"></i><b>4.1</b> Définition</a></li>
+<li class="chapter" data-level="4.2" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#avantages-3"><i class="fa fa-check"></i><b>4.2</b> Avantages</a></li>
+<li class="chapter" data-level="4.3" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#inconvénients-3"><i class="fa fa-check"></i><b>4.3</b> Inconvénients</a></li>
+<li class="chapter" data-level="4.4" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#en-r-1"><i class="fa fa-check"></i><b>4.4</b> En <code>R</code></a></li>
+<li class="chapter" data-level="4.5" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#exemples-2"><i class="fa fa-check"></i><b>4.5</b> Exemples</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#exemple-1-lime-sur-le-jeu-de-données-weather"><i class="fa fa-check"></i><b>4.5.1</b> Exemple 1 : LIME sur le jeu de données <code>weather</code></a></li>
+<li><a href="substitut-local-lime.html#exemple-2-lime-sur-le-jeu-de-données-iris">Exemple 2 : LIME sur le jeu de données <code>iris</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>5</b> Références</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Interprétabilité de boîtes noires</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="références" class="section level1">
+<h1><span class="header-section-number">Chapitre 5</span> Références</h1>
+<p><strong>Références pour les jeux de données utilisés</strong></p>
+<ul>
+<li><p><code>mtcars</code> est un jeu de données inclus dans R.<br />
+Les données ont été extraites du magazine américain Motor Trend de 1974 et comprennent la consommation de carburant et 10 aspects de la conception et des performances des automobiles pour 32 automobiles (modèles de 1973 à 1974).</p></li>
+<li><p><code>weather</code> est un jeu de données inclus dans le package <code>nycflights13</code> dans R.<br />
+Ce sont les données météorologiques horaires pour les aéroports de New York : LGA, JFK et EWR.</p></li>
+<li><p><code>iris</code> est un jeu de données inclus dans R.<br />
+Cet ensemble de données sur l'iris (de Fisher ou d'Anderson) donne les mesures en centimètres des variables longueur et largeur des sépales et longueur et largeur des pétales, respectivement, pour 50 fleurs de chacune des 3 espèces d'iris. Les espèces sont Iris setosa, versicolor et virginica.</p></li>
+<li><p><code>fifa</code> est un jeu de données non inclus dans R. Il est disponible à l'adresse suivante : <a href="https://www.kaggle.com/thec03u5/fifa-18-demo-player-dataset" class="uri">https://www.kaggle.com/thec03u5/fifa-18-demo-player-dataset</a>.<br />
+Elle regroupe les notes de joueurs professionnels jouant au football ainsi que leurs caractéristiques.</p></li>
+</ul>
+<p><strong>Référence au package <code>iml</code></strong></p>
+<ul>
+<li><a href="https://cran.r-project.org/web/packages/iml/iml.pdf" class="uri">https://cran.r-project.org/web/packages/iml/iml.pdf</a></li>
+</ul>
+<p><strong>Lien du livre</strong></p>
+<ul>
+<li>Christoph Molnar. 2020. Interpretable Machine Learning : A Guide for Making Black Box Models Explainable. <a href="https://christophm.github.io/interpretable-ml-book/" class="uri">https://christophm.github.io/interpretable-ml-book/</a></li>
+</ul>
+<p><strong>Liens utiles</strong></p>
+<ul>
+<li><p><a href="https://perso.math.univ-toulouse.fr/mllaw/home/statisticien/explicabilite-des-decisions-algorithmiques/methodes-dapprentissage-machine/" class="uri">https://perso.math.univ-toulouse.fr/mllaw/home/statisticien/explicabilite-des-decisions-algorithmiques/methodes-dapprentissage-machine/</a></p></li>
+<li><p>Xie, Yihui. 2020. Bookdown: Authoring Books and Technical Documents with R Markdown. <a href="https://CRAN.R-project.org/package=bookdown" class="uri">https://CRAN.R-project.org/package=bookdown</a></p></li>
+</ul>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="substitut-local-lime.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Interpretabilite-boite-noire.pdf", "Interpretabilite-boite-noire.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

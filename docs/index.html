@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr" xml:lang="fr">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Interprétabilité de boîtes noires</title>
+  <meta name="description" content="Projet tutoré présenté par Lucie Guillaumin et Mehdi Chebli encadré par Mr. Perduca." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Interprétabilité de boîtes noires" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Projet tutoré présenté par Lucie Guillaumin et Mehdi Chebli encadré par Mr. Perduca." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Interprétabilité de boîtes noires" />
+  
+  <meta name="twitter:description" content="Projet tutoré présenté par Lucie Guillaumin et Mehdi Chebli encadré par Mr. Perduca." />
+  
+
+<meta name="author" content="Lucie Guillaumin &amp; Mehdi Chebli" />
+
+
+<meta name="date" content="2021-01-03" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="graphique-de-dépendance-partielle-pdp.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Interprétabilité de boites noires</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="chapter" data-level="2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html"><i class="fa fa-check"></i><b>2</b> Graphique de dépendance partielle (PDP)</a><ul>
+<li class="chapter" data-level="2.1" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#définition"><i class="fa fa-check"></i><b>2.1</b> Définition</a><ul>
+<li class="chapter" data-level="" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple"><i class="fa fa-check"></i>Exemple</a></li>
+<li class="chapter" data-level="" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#cas-particulier"><i class="fa fa-check"></i>Cas particulier</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#avantages"><i class="fa fa-check"></i><b>2.2</b> Avantages</a></li>
+<li class="chapter" data-level="2.3" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#inconvénients"><i class="fa fa-check"></i><b>2.3</b> Inconvénients</a></li>
+<li class="chapter" data-level="2.4" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#programmation"><i class="fa fa-check"></i><b>2.4</b> Programmation</a></li>
+<li class="chapter" data-level="2.5" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemples"><i class="fa fa-check"></i><b>2.5</b> Exemples</a><ul>
+<li class="chapter" data-level="2.5.1" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple-1-utilisation-de-deux-boites-noires-différentes-comme-modèles-sur-le-jeu-de-données-weather"><i class="fa fa-check"></i><b>2.5.1</b> Exemple 1 : Utilisation de deux boites noires différentes comme modèles sur le jeu de données <code>weather</code></a></li>
+<li class="chapter" data-level="2.5.2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple-2-utilisation-de-deux-boites-noires-différentes-comme-modèles-sur-le-jeu-de-données-mtcars"><i class="fa fa-check"></i><b>2.5.2</b> Exemple 2 : Utilisation de deux boites noires différentes comme modèles sur le jeu de données <code>mtcars</code></a></li>
+</ul></li>
+<li class="chapter" data-level="2.6" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#espérance-conditionnelle-individuelle-ice"><i class="fa fa-check"></i><b>2.6</b> Espérance conditionnelle individuelle (ICE)</a><ul>
+<li class="chapter" data-level="2.6.1" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#définition-1"><i class="fa fa-check"></i><b>2.6.1</b> Définition</a></li>
+<li class="chapter" data-level="2.6.2" data-path="graphique-de-dépendance-partielle-pdp.html"><a href="graphique-de-dépendance-partielle-pdp.html#exemple-ice-avec-le-jeu-de-données-weather-et-comme-boite-noire-une-forêt-aléatoire"><i class="fa fa-check"></i><b>2.6.2</b> Exemple : ICE avec le jeu de données <code>weather</code> et comme boite noire une forêt aléatoire</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html"><i class="fa fa-check"></i><b>3</b> Importance des variables dans les modèles prédictifs</a><ul>
+<li class="chapter" data-level="3.1" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#définition-2"><i class="fa fa-check"></i><b>3.1</b> Définition</a></li>
+<li class="chapter" data-level="3.2" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#avantages-2"><i class="fa fa-check"></i><b>3.2</b> Avantages</a></li>
+<li class="chapter" data-level="3.3" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#inconvénients-2"><i class="fa fa-check"></i><b>3.3</b> Inconvénients</a></li>
+<li class="chapter" data-level="3.4" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#en-r"><i class="fa fa-check"></i><b>3.4</b> En <code>R</code></a></li>
+<li class="chapter" data-level="3.5" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#exemples-1"><i class="fa fa-check"></i><b>3.5</b> Exemples</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#exemple-1-pfi-sur-les-données-iris"><i class="fa fa-check"></i><b>3.5.1</b> Exemple 1 : PFI sur les données <code>iris</code></a></li>
+<li class="chapter" data-level="3.5.2" data-path="importance-des-variables-dans-les-modèles-prédictifs.html"><a href="importance-des-variables-dans-les-modèles-prédictifs.html#exemple-2-pfi-sur-les-données-fifa"><i class="fa fa-check"></i><b>3.5.2</b> Exemple 2 : PFI sur les données <code>fifa</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html"><i class="fa fa-check"></i><b>4</b> Substitut local (LIME)</a><ul>
+<li class="chapter" data-level="4.1" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#définition-3"><i class="fa fa-check"></i><b>4.1</b> Définition</a></li>
+<li class="chapter" data-level="4.2" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#avantages-3"><i class="fa fa-check"></i><b>4.2</b> Avantages</a></li>
+<li class="chapter" data-level="4.3" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#inconvénients-3"><i class="fa fa-check"></i><b>4.3</b> Inconvénients</a></li>
+<li class="chapter" data-level="4.4" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#en-r-1"><i class="fa fa-check"></i><b>4.4</b> En <code>R</code></a></li>
+<li class="chapter" data-level="4.5" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#exemples-2"><i class="fa fa-check"></i><b>4.5</b> Exemples</a><ul>
+<li class="chapter" data-level="4.5.1" data-path="substitut-local-lime.html"><a href="substitut-local-lime.html#exemple-1-lime-sur-le-jeu-de-données-weather"><i class="fa fa-check"></i><b>4.5.1</b> Exemple 1 : LIME sur le jeu de données <code>weather</code></a></li>
+<li><a href="substitut-local-lime.html#exemple-2-lime-sur-le-jeu-de-données-iris">Exemple 2 : LIME sur le jeu de données <code>iris</code></a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="références.html"><a href="références.html"><i class="fa fa-check"></i><b>5</b> Références</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Interprétabilité de boîtes noires</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Interprétabilité de boîtes noires</h1>
+<p class="author"><em>Lucie Guillaumin &amp; Mehdi Chebli</em></p>
+<p class="date"><em>2021-01-03</em></p>
+</div>
+<div id="introduction" class="section level1">
+<h1><span class="header-section-number">Chapitre 1</span> Introduction</h1>
+<div class="figure">
+<img src="logomemoire.png" />
+
+</div>
+<p>Le machine learning (apprentissage automatique en français) est une technologie d’intelligence artificielle, qui à l’aide d’approches mathématiques et surtout statistiques permet de donner la capacité aux machines d’apprendre à partir des données. C’est-à-dire d’améliorer leurs performances à résoudre des tâches sans être explicitement programmés pour chacunes.<br />
+L'objectif de ces algorithmes consiste à estimer un modèle à partir des observations puis prédire une variable que l'on souhaite expliquer.</p>
+<p>Certains de ces modèles de machine learning sont appelés boîtes noires. En effet, après application du modèle, on obtient des résultats mais nous ne savons pas comment ni pourquoi la machine est parvenue à ce résultat.<br />
+Dans ce mémoire, nous cherchons donc à expliquer et à comprendre comment et pourquoi un modèle de boite noire donne tel ou tel résultat. Les différents chapitres que contiennent ce livre expliqueront donc comment résoudre ce problème appelé interprétabilité.</p>
+<p>On peut trouver différentes définitions de l’interprétabilité sur le net, celles que nous retiendrons sont les suivantes :</p>
+<ul>
+<li><p>la capacité dans laquelle un être humain peut comprendre la cause d’une décision</p></li>
+<li><p>le degré auquel un être humain peut prédire de manière cohérente le résultat d’un modèle</p></li>
+</ul>
+<p>L’interprétabilité est très importante dans le monde des modèles de machine learning. En réalité, dans de nombreux domaines il faut expliquer/justifier une prise de décision provoquée par le modèle prédictif. Notons qu’elle n’est pas requise si le modèle étudié n’a pas d’impact significatif : si le modèle possède un impact social ou financier, l’interprétabilité devient alors pertinente. De plus, lorsque le modèle est bien étudié il n’est pas nécessaire de faire appel à elle.</p>
+<p>Certains algorithmes disposent de méthodes permettant de déterminer l’importance des variables, ils n’indiquent cependant pas si une variable affecte positivement ou négativement le modèle. Effectivement, dans la plupart des cas, on ne se soucie généralement pas de savoir pourquoi telle ou telle décision a été prise : on ne cherche qu’à savoir si la performance prédictive sur un jeu de données de test est correct. Mais il faut néanmoins faire attention : une prédiction correcte ne résout que partiellement notre problème initial, elle ne nous donne aucune information ni explication.</p>
+<p>Le besoin d’interprétabilité signifie donc qu’il ne suffit pas d‘obtenir la prédiction (le quoi) mais plutôt que le modèle doit expliquer comment il en est arrivé à la prédiction (le pourquoi). Mais encore une fois attention, les explications du modèle ne doivent pas expliquer entièrement le déroulement du modèle, ils doivent plutôt aborder une ou deux cause(s) principale(s).</p>
+<p>Pour cela, nous avons choisi trois méthodes : les graphiques de dépendance partielle, la permutation de variable afin de remarquer les variables les plus importantes dans les modèles prédictif, et la méthode LIME.<br />
+Nous nous appuierons donc sur des exemples appliqués à des ensembles de données ainsi que sur des modèles de boites noires présentés dans les références du livre.</p>
+<p>Nous nous baserons sur le livre <code>Interpretable Machine Learning</code> de Christophe Molnar.</p>
+<p><img src="logouniv.png" width="930" style="display: block; margin: auto;" /></p>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="graphique-de-dépendance-partielle-pdp.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Interpretabilite-boite-noire.pdf", "Interpretabilite-boite-noire.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

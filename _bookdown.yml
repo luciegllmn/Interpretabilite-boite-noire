@@ -1,0 +1,9 @@
+book_filename: "Interpretabilite-boite-noire"
+output_dir: "docs"
+delete_merged_file: true
+language:
+  ui:
+    chapter_name: "Chapitre "
+new_session: yes
+
+
