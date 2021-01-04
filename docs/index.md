@@ -1,7 +1,7 @@
 --- 
 title: "Interprétabilité de boîtes noires"
 author: "Lucie Guillaumin & Mehdi Chebli"
-date: "2021-01-03"
+date: "2021-01-04"
 site: bookdown::bookdown_site
 documentclass: book
 bibliography: [book.bib, packages.bib]
@@ -43,6 +43,12 @@ Le besoin d’interprétabilité signifie donc qu’il ne suffit pas d‘obtenir
 Pour cela, nous avons choisi trois méthodes : les graphiques de dépendance partielle, la permutation de variable afin de remarquer les variables les plus importantes dans les modèles prédictif, et la méthode LIME.   
 Nous nous appuierons donc sur des exemples appliqués à des ensembles de données ainsi que sur des modèles de boites noires présentés dans les références du livre.  
   
-Nous nous baserons sur le livre `Interpretable Machine Learning` de Christophe Molnar.
+Nous nous baserons sur le livre `Interpretable Machine Learning` de Christophe Molnar.  
+
+##Remerciements {-}
+Nous tenons à remercier Mr. Perduca qui nous a permis de bénéficier de son encadrement.  
+Les conseils qu’il nous a prodigué, la patience, la confiance qu’il nous a témoignés ont été déterminants dans la réalisation de notre travail.  
+Nos remerciements s’étendent également à tous nos enseignants durant les années des études.
+Enfin, nous tenons à remercier tous ceux qui, de près ou de loin, ont contribué à la réalisation de ce travail.
 
 <img src="logouniv.png" width="930" style="display: block; margin: auto;" />

@@ -85,7 +85,7 @@ Nous avons donc, ici, deux problèmes :
 
 Le PDP masque les effets hétérogènes entre les variables, en effet, il ne montre que les effets marginaux moyens. Une solution à ce problème est le graphique **ICE** présenté plus loin dans ce chapitre.
 
-##Programmation
+##En `R`
 En `R`, nous utilisons le package `iml` pour implémenter les graphique de dépendance partielle.
 Ci-dessous nous pouvons trouver un exemple de code avec pour boite noire une forêt aléatoire :   
 ```{}
